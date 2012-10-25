@@ -1,8 +1,8 @@
-Redbubble-API-v1
+Redbubble-API
 ================
 
-First attempt at a bootleg Redbubble API.
+A bootleg Redbubble API.
 
-Pulls all the preview image and link to the product from the first page of a profiles 'Shop' tab.
+API v1 -- Pulls all the preview image and link to the product from the first page of a profiles 'Shop' tab.
 
 I'm going to be working on a full API over the coming weeks.
