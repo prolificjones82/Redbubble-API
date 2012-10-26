@@ -98,6 +98,7 @@ if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 			}
 			echo "<img src='" . $data['img'] . "' />";
 			
+			// Get item price
 			if ($prices = $item->getElementsByTagName('span')) {
 				$data['price'] = $prices->item(2)->nodeValue;
 			}
