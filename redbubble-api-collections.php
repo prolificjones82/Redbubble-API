@@ -16,6 +16,7 @@ $rburl = "http://www.redbubble.com";
 // ERROR LIST
 $error1 = "The user <i><b>'" . $_GET['rb_user'] . "'</b></i> doesn't exist on Redbubble.<br />\n"
 	. "<a href='" . $_SERVER['HTTP_REFERER'] . "'><< Go Back</a>";
+$error2 = "PHP Error: Please enable <b><i>'allow_url_fopen'</i></b> in your PHP configuration.\n";
 
 if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 	$url = sprintf($rburl . "/people/%s/portfolio/", $_GET['rb_user']);
