@@ -8,7 +8,18 @@ API v1 -- Pulls all the preview image and link to the product from the first pag
 API Collections -- Pulls a users collections and images inside the collections. This is the one I would recommend 
 you use!
 
-I'm going to be working on a full API over the coming weeks.
+
+
+::::CHANGE LOG::::
+
+=================================================================
+
+15/01/2013 - API COLLECTIONS - removed input form. Get data should be passed by some other method for a better user experience.
+
+=================================================================
+
+
+
 
 ::::KNOWN ISSUES::::
 
