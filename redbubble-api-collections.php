@@ -116,15 +116,6 @@ if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 		die($error1);
 	}
 	
-} else {
-	$form = "<form method='get'>\n"
-		. "<table>\n"
-		. "<tr><th>Redbubble Username:</th><td><input type='text' name='rb_user' /></td></tr>\n"
-		. "<tr><th>&nbsp;</th><td><input type='submit' value='Go' /></td></tr>\n"
-		. "</table>\n"
-		. "</form>";
-		
-	print($form);
 }
 
 ?>
