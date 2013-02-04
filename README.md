@@ -19,9 +19,7 @@ http://store.leejones.me.uk
 
 ##KNOWN ISSUES
 
-- NO ITEMS IN COLLECIONS
-
-Your list of collections will show up fine. But when you click into the collection it is empty. This is due to they 
+- NO ITEMS IN COLLECIONS : Your list of collections will show up fine. But when you click into the collection it is empty. This is due to they 
 type of thumbnail you have for you item previews in you collection.
 
 *RESOLUTION
