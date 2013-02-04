@@ -15,6 +15,7 @@ you use!
 =================================================================
 
 15/01/2013 - API COLLECTIONS - removed input form. Get data should be passed by some other method for a better user experience.
+04/02/2013 - REMOVED V1 API - removed version 1 of the API, the full collections API is far more versatile and can be adapted to needs.
 
 =================================================================
 
