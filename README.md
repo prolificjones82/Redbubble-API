@@ -8,7 +8,7 @@ http://store.leejones.me.uk
 
 
 
-##CHANGE LOG
+##Change Log
 
 
 - [15/01/2013] - API COLLECTIONS - removed input form. Get data should be passed by some other method for a better user experience.
@@ -17,7 +17,7 @@ http://store.leejones.me.uk
 
 
 
-##KNOWN ISSUES
+##Known Issues
 
 - NO ITEMS IN COLLECIONS : Your list of collections will show up fine. But when you click into the collection it is empty. This is due to they 
 type of thumbnail you have for you item previews in you collection.
