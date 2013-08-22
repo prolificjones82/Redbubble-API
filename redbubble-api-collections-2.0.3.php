@@ -39,7 +39,7 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
 		
 		echo "<ul>";
 		foreach($items as $item) {
-			echo "<a href='" . $_SERVER['REQUEST_URI'] . "&coll=";
+			echo "<a href='" . $_SERVER['REQUEST_URI'] . "?rb_user=" . $rbuser . "&coll=";
 			
 			// Strip link to leave collection ID and title
 			$pattern = "/people/" . $rbuser . "/collections/";
