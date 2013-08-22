@@ -12,14 +12,15 @@
  */ 
 
 $rburl = "http://www.redbubble.com";
+$rbuser = "USERNAME HERE";
 
 // ERROR LIST
-$error1 = "The user <i><b>'" . $_GET['rb_user'] . "'</b></i> doesn't exist on Redbubble.<br />\n"
+$error1 = "The user <i><b>'" . $rbuser. "'</b></i> doesn't exist on Redbubble.<br />\n"
 	. "<a href='" . $_SERVER['HTTP_REFERER'] . "'><< Go Back</a>";
 $error2 = "PHP Error: Please enable <b><i>'allow_url_fopen'</i></b> in your PHP configuration.\n";
 
-if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
-	$url = sprintf($rburl . "/people/%s/portfolio/", $_GET['rb_user']);
+if (!empty($rbuser) && empty($_GET['coll'])) {
+	$url = sprintf($rburl . "/people/%s/portfolio/", $rbuser);
 
 	if ($xhtml = @file_get_contents($url, FILE_SKIP_EMPTY_LINES)) {
 		$data = array();
@@ -41,7 +42,7 @@ if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 			echo "<a href='" . $_SERVER['REQUEST_URI'] . "&coll=";
 			
 			// Strip link to leave collection ID and title
-			$pattern = "/people/" . $_GET['rb_user'] . "/collections/";
+			$pattern = "/people/" . $rbuser . "/collections/";
 			$coll_id = str_replace($pattern, "", $item->getAttribute('href'));
 			echo $coll_id;
 			
@@ -71,7 +72,7 @@ if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 
 } elseif (!empty($_GET['coll'])) {	
 
-	$url = sprintf($rburl . "/people/%s/collections/%s", $_GET['rb_user'], $_GET['coll']);
+	$url = sprintf($rburl . "/people/%s/collections/%s", $rbuser, $_GET['coll']);
 
 	if ($xhtml = @file_get_contents($url, FILE_SKIP_EMPTY_LINES)) {
 		$data = array();
@@ -98,12 +99,6 @@ if (!empty($_GET['rb_user']) && empty($_GET['coll'])) {
 				$data['img'] = $img->item(0)->getAttribute('src');
 			}
 			echo "<img src='" . $data['img'] . "' />";
-			
-			// Get item price
-			if ($prices = $item->getElementsByTagName('span')) {
-				$data['price'] = $prices->item(2)->nodeValue;
-			}
-			echo "<p><b>" . substr($data['price'], 1) . "</b></p>";
 			
 			echo "</li></a>";
 		}
