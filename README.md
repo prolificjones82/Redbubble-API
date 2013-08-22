@@ -9,11 +9,11 @@ http://leejones.me.uk/projects/redbubble-api
 ## Usage
 Upload `redbubble-api-collections.php` to your server.
 
-The script uses a `$_GET['rb_user']` variable to grab your items from Redbubble. When you create the link you will need to add this, in the example below remove 'username' and replace with your Redbubble username as it appears in the URL for your page.
+The script uses a `$rbuser` variable to grab your items from Redbubble. This will need editing in the `redbubble-api-collections.php` file.
 
 *Example*
 ```html
-<a href="redbubble-api-collections.php?rb_user=username">Redbubble</a>
+$rbuser = "YOUR_REBUBBLE_USERNAME_HERE";
 ```
 
 Now when you visit the page you uploaded you will see the list of collections on your Redbubble profile ready for styling.
