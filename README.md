@@ -4,7 +4,7 @@
 `redbubble-api-collections.php` is a homebrew API designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections. The API terminates at the point of selecting an individual item, this will send you to the Redbubble website page for that item.
 
 ###See it in action:
-http://leejones.me.uk/projects/redbubble-api
+http://leejones.me.uk/redbubble
 
 ## Usage
 Upload `redbubble-api-collections.php` to your server.
