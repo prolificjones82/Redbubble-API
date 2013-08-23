@@ -16,7 +16,7 @@ The script uses a `$rbuser` variable to grab your items from Redbubble. This wil
 $rbuser = "YOUR_REBUBBLE_USERNAME_HERE";
 ```
 
-Now when you visit the page you uploaded you will see the list of collections on your Redbubble profile ready for styling.
+If you do not choose to edit this variable a form requesting a Redbubble username will be output.
 
 
 ##Change Log
