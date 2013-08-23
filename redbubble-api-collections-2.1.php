@@ -116,7 +116,7 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
             echo "<img src='" . $data['img'] . "' />";
             
             // Get item price
-			if ($prices = $item->getElementsByTagName('meta')) {
+	    if ($prices = $item->getElementsByTagName('meta')) {
                 $data['currency'] = $prices->item(5)->getAttribute('content');
                 if ($data['currency'] == 'GBP') {
                     $currency = '&pound;';
@@ -124,10 +124,10 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
                     $currency = '$';
                 } elseif ($data['currency'] == 'EUR') {
                     $currency = '&euro;';
-                }
+            	}
                 $data['price'] = $prices->item(4)->getAttribute('content');
-			}
-			echo "<h5>" . $currency . number_format((float)$data['price'], 2, '.', '') . "</h5>";
+	    }
+	    echo "<h5>" . $currency . number_format((float)$data['price'], 2, '.', '') . "</h5>";
             
             echo "</a></li>";
         }
