@@ -6,6 +6,8 @@
 ###Websites Using the API:
 http://timtopping.com
 
+(If you want to be included on this list email me at mail@leejones.me.uk with the subject 'Redbubble API')
+
 ###View the project website:
 http://redbubble.leejones.me.uk/
 
