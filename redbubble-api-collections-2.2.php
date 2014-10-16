@@ -6,7 +6,7 @@
  *   Released under GNU Lesser General Public License (http://www.gnu.org/copyleft/lgpl.html)
  *
  *
- *     Please submit all problems or questions to the Issues page on the projects GitHub page:
+ *   Please submit all problems or questions to the Issues page on the projects GitHub page:
  *   https://github.com/prolificjones82/Redbubble-API
  *
  */ 
@@ -88,6 +88,7 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
     $url = sprintf($rburl . "/people/%s/collections/%s", $rbuser, $_GET['coll']);
 
     if ($xhtml = @file_get_contents($url, FILE_SKIP_EMPTY_LINES)) {
+
         $data = array();
         
         $doc = new DOMDocument();
@@ -97,7 +98,7 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
         
         // Grab Link URL
         $xpath = new DOMXpath($doc);
-        $itemquery = "//a[contains(concat(' ',normalize-space(@class),' '), 'shop-product')]";
+        $itemquery = "//a[contains(concat(' ',normalize-space(@class),' '), 'grid-item')]";
         $items = $xpath->query($itemquery);
         
         // Back Link
@@ -116,7 +117,7 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
             echo "<img src='" . $data['img'] . "' />";
             
             // Get item price
-	    if ($prices = $item->getElementsByTagName('meta')) {
+            if ($prices = $item->getElementsByTagName('meta')) {
                 $data['currency'] = $prices->item(5)->getAttribute('content');
                 if ($data['currency'] == 'GBP') {
                     $currency = '&pound;';
@@ -124,10 +125,10 @@ if (!empty($rbuser) && empty($_GET['coll'])) {
                     $currency = '$';
                 } elseif ($data['currency'] == 'EUR') {
                     $currency = '&euro;';
-            	}
+                }
                 $data['price'] = $prices->item(4)->getAttribute('content');
-	    }
-	    echo "<h5>" . $currency . number_format((float)$data['price'], 2, '.', '') . "</h5>";
+            }
+            echo "<h5>" . $currency . number_format((float)$data['price'], 2, '.', '') . "</h5>";
             
             echo "</a></li>";
         }
