@@ -3,8 +3,30 @@
 require 'redbubble/redbubble.php';
 
 $redbubble = new Redbubble('prolificlee');
-$collections = $redbubble->getCollections();
 
-echo '<pre>';
-print_r($collections);
-echo '</pre>';
+if (!$_GET['rbu'] && !$_GET['cID'])
+{
+    $collections = $redbubble->getCollections();
+    
+    foreach ($collections as $collection)
+    {
+        echo '<a href="' . $collection['url'] . '">';
+        echo '<img src="' . $collection['image'] . '" alt="' . $collection['collection_id'] . '" />';
+        echo '<h5>' . $collection['title'] . '</h5>';
+        echo '</a>';
+    }
+}
+else
+{
+    $products = $redbubble->getProducts($_GET['cID']);
+    
+    foreach ($products as $product)
+    {
+        echo '<a href="' . $product['link'] . '" target="_blank">';
+        echo '<img src="' . $product['design_image'] . '" alt="' . $product['title'] . '" />';
+        echo '<img src="' . $product['product_image'] . '" alt="' . $product['title'] . '" />';
+        echo '<h5>' . $product['title'] . '</h5>';
+        echo '<h6>' . $product['price'] . '</h6>';
+        echo '</a>';
+    }
+}
