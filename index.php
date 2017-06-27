@@ -4,7 +4,7 @@ require 'redbubble/redbubble.php';
 
 $redbubble = new Redbubble('prolificlee');
 
-if (!$_GET['rbu'] && !$_GET['cID'])
+if (!isset($_GET['rbu']) && !isset($_GET['cID']))
 {
     $collections = $redbubble->getCollections();
     

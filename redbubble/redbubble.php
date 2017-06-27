@@ -12,7 +12,7 @@ class Redbubble
 	{
 		$this->rbuser = $rbuser;
 		$this->pretty_urls = $pretty_urls;
-		$this->response_type = $type; // array, obj, json or xml
+		$this->response_type = $type; // array, object, or json
 	}
 	
 	private function generateCollectionLink($collection_id)
@@ -57,6 +57,16 @@ class Redbubble
 			$data[] = $item_array;
 		}
 		
+		// conversion options
+		if ($this->response_type === 'object')
+		{
+			$data = (object)$data;
+		}
+		else if ($this->response_type === 'json')
+		{
+			$data = json_encode($data);
+		}
+		
 		return $data;
 	}
 	
@@ -97,6 +107,15 @@ class Redbubble
 			$item_array['price'] = implode('', $pricing_array);
 			
 			$data[] = $item_array;
+		}
+		
+		if ($this->response_type === 'object')
+		{
+			$data = (object)$data;
+		}
+		else if ($this->response_type === 'json')
+		{
+			$data = json_encode($data);
 		}
 		
 		return $data;
