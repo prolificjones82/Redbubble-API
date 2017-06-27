@@ -74,6 +74,53 @@ class Redbubble
 
 	public function getProducts($collection_id)
 	{
+		$url = sprintf($rburl . "/people/%s/collections/%s", $this->rbuser, $collection_id);
 		
+		if ($xhtml = @file_get_contents($url, FILE_SKIP_EMPTY_LINES))
+		{
+			$data = array();
+
+			$doc = new DOMDocument();
+			if (!@$doc->loadHTML($xhtml)) {
+				$errors['errors'][] = 'PHP Config: allow_url_fopen required.';
+			}
+			
+			if (count($errors) > 0)
+			{
+				return $errors;
+			}
+			else
+			{
+				// Grab Link URL
+				$xpath = new DOMXpath($doc);
+				$itemquery = "//a[contains(concat(' ',normalize-space(@class),' '), 'grid-item')]";
+				$items = $xpath->query($itemquery);
+
+				foreach ($items as $item)
+				{
+					$item_array = array();
+
+					$item_array['product_link'] = $this->rburl . $item->getAttribute('href');
+					if ($img = $item->getElementsByTagName('img'))
+					{
+						$item_array['image'] = $img->item(0)->getAttribute('src');
+					}
+
+					if ($prices = $item->getElementsByTagName('meta'))
+					{
+						$item_array['currency'] = $prices->item(5)->getAttribute('content');
+						$item_array['price'] = $prices->item(4)->getAttribute('content');
+					}
+
+					$data[] = $item_array;
+				}
+			}
+			
+			return $data;
+		}
+		else
+		{
+			$errors['errors'][] = '404: Page not found.';
+		}
 	}
 }
