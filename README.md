@@ -43,7 +43,7 @@ To view a brief example of how you could structure your code take a look at ```i
 
 ## Options
 
-These options need to be set when the class is intantated with ```new Redbbuble()```.
+These options need to be set when the class is intantated with ```new Redbubble()```.
 
 | Name                | Type    | Default       | Description                                                                                                     |
 |---------------------|---------|---------------|-----------------------------------------------------------------------------------------------------------------|
