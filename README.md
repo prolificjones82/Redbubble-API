@@ -1,56 +1,42 @@
-#Redbubble-API
-*A bootleg Redbubble API*
+# Redbubble-API Scraper
 
-`redbubble-api-collections.php` is a homebrew API designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections. The API terminates at the point of selecting an individual item, this will send you to the Redbubble website page for that item.
+A homebrew API style page scraper designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections. The API terminates at the point of selecting an individual item, this will send you to the Redbubble website page for that item.
 
-###Websites Using the API:
-http://timtopping.com
+### Websites Using the API:
+http://timtopping.com (v2)
 
-(If you want to be included on this list email me at mail@leejones.me.uk with the subject 'Redbubble API')
+## Quick Use
+Upload the ```redbubble``` folder to your server.
 
-###View the project website:
-http://redbubble.leejones.me.uk/
+Include the file in your page ```require "redbubble/redbubble.php";```
 
-## Usage
-Upload `redbubble-api-collections.php` to your server.
+Initiante the class with your Redbubble username:
 
-The script uses a `$rbuser` variable to grab your items from Redbubble. This will need editing in the `redbubble-api-collections.php` file.
-
-*Example*
-```html
-$rbuser = "YOUR_REBUBBLE_USERNAME_HERE";
+```php
+$redbubble = new Redbubble('username');
 ```
 
-If you do not choose to edit this variable a form requesting a Redbubble username will be output.
+There are now two functions you can use, ```getCollections()``` and ```getProducts($collection_id)```. 
 
+The ```getProducts()``` function requires a ```$collection_id``` as a parameter this is returned as part of the ```GetCollections()``` function.
 
-##Change Log
+## Pretty URLS
 
+By default the functions return links as query strings using ```rbu``` and ```cID``` as query parameters. By setting the ```$pretty_urls``` variable to ```true``` when the Redbubble class is initiated these will be rewritten in ```/rbu/cID/``` format, you will need to modify your ```htaccess``` file to compensate.
 
+## Response Types
+
+Returned responses are a simple PHP ```array``` by default, however a third option in the class is to specify the returned data type.
+
+Options are ```array```, ```object```, ```json```
+
+## Change Log
+
+- [27/06/2017] - *v3* switched to a class based system, also using the ```html_dom_parser.php``` script to obtain the page heirarchy.
 - [15/01/2013] - API COLLECTIONS - removed input form. Get data should be passed by some other method for a better user experience.
 - [04/02/2013] - REMOVED V1 API - removed version 1 of the API, the full collections API is far more versatile and can be adapted to needs.
 
 
-
-
-##Known Issues
-
-- NO ITEMS IN COLLECTIONS : Your list of collections will show up fine. But when you click into the collection it is empty. This is due to they 
-type of thumbnail you have for you item previews in you collection.
-
-*RESOLUTION
-Go to your Redbubble page, click the profile tab. Hover over each of the collections that have the issue, you will 
-see a red box with a cog icon. Click this and a pop up open with your collection settings. In the thumbnails drop down 
-choose any option EXCEPT CROPPED or UNCROPPED. The items will now show in your collections via the API.*
-
-
-
-##Thanks & Donations
-
-If you find this script so amazing you want to thank me, please feel free to make a small donation on my <a href="http://leejones.me.uk" target="_blank">website</a>.
-
-
-
-##Licence
+## Licence
 
 Copyright (c) 2012 Lee Jones, Licensed under GNU Lesser General Public License.
