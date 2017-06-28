@@ -13,7 +13,7 @@ Include the file in your page ```require "redbubble/redbubble.php";```
 Initiante the class with your Redbubble username:
 
 ```php
-$redbubble = new Redbubble('username');
+$redbubble = new Redbubble('username', false, 'array');
 ```
 
 There are now two functions you can use, ```getCollections()``` and ```getProducts($collection_id)```. 
@@ -29,6 +29,27 @@ By default the functions return links as query strings using ```rbu``` and ```cI
 Returned responses are a simple PHP ```array``` by default, however a third option in the class is to specify the returned data type.
 
 Options are ```array```, ```object```, ```json```
+
+## Example
+
+To view a brief example of how you could structure your code take a look at ```index.php``` in the repository.
+
+## Available Functions
+
+| Name             | Parameters           | Description                                                                                  |
+|------------------|----------------------|----------------------------------------------------------------------------------------------|
+| getCollections() | none                 | Retrieves a list of all collections belonging to the current ```rbuser```                    |
+| getProducts()    | ```$collection_id``` | Retrieves a list of products from a particular collection, ```$collection_id``` is required. |
+
+## Options
+
+These options need to be set when the class is intantated with ```new Redbbuble()```.
+
+| Name                | Type    | Default       | Description                                                                                                     |
+|---------------------|---------|---------------|-----------------------------------------------------------------------------------------------------------------|
+| ```rbuser```        | String  | ```null```    | This is **required** allows the class to scrape your Redbubble page.                                              |
+| ```pretty_urls```   | Boolean | ```false```   | For SEO purposes you may wish to use pretty URLS, set this to ```true``` and ensure to edit your htaccess file. |
+| ```response_type``` | String  | ```array```   | Defines response type, possible values are ```array```, ```object``` and ```json```                             |
 
 ## Change Log
 
