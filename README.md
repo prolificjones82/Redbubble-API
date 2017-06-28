@@ -60,4 +60,4 @@ These options need to be set when the class is intantated with ```new Redbubble(
 
 ## Licence
 
-Copyright (c) 2012 Lee Jones, Licensed under GNU Lesser General Public License.
+Built and maintained by Lee Jones <mail@leejones.me.uk> MIT License
