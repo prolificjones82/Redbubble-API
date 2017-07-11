@@ -51,13 +51,6 @@ These options need to be set when the class is intantated with ```new Redbubble(
 | ```pretty_urls```   | Boolean | ```false```   | For SEO purposes you may wish to use pretty URLS, set this to ```true``` and ensure to edit your htaccess file. |
 | ```response_type``` | String  | ```array```   | Defines response type, possible values are ```array```, ```object``` and ```json```                             |
 
-## Change Log
-
-- [27/06/2017] - *v3* switched to a class based system, also using the ```html_dom_parser.php``` script to obtain the page heirarchy.
-- [15/01/2013] - API COLLECTIONS - removed input form. Get data should be passed by some other method for a better user experience.
-- [04/02/2013] - REMOVED V1 API - removed version 1 of the API, the full collections API is far more versatile and can be adapted to needs.
-
-
 ## Licence
 
 Built and maintained by Lee Jones <mail@leejones.me.uk> MIT License
