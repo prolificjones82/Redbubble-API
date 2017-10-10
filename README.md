@@ -57,7 +57,7 @@ Example:
 
 ```
 RewriteEngine On
-RewriteRule ^([^/]*)/([^/]*)/$ /shop?rbu=$1&cID=$2 [L]
+RewriteRule ^([^/]*)/([^/]*)/$ /?rbu=$1&cID=$2 [L]
 ```
 
 ## Licence
