@@ -55,8 +55,10 @@ These options need to be set when the class is initiated with ```new Redbubble()
 
 Example:
 
-```RewriteEngine On
-RewriteRule ^([^/]*)/([^/]*)/$ /shop?rbu=$1&cID=$2 [L]```
+```
+RewriteEngine On
+RewriteRule ^([^/]*)/([^/]*)/$ /shop?rbu=$1&cID=$2 [L]
+```
 
 ## Licence
 
