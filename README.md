@@ -48,14 +48,15 @@ These options need to be set when the class is initiated with ```new Redbubble()
 | Name                | Type    | Default       | Description                                                                                                     |
 |---------------------|---------|---------------|-----------------------------------------------------------------------------------------------------------------|
 | ```rbuser```        | String  | ```null```    | This is **required** allows the class to scrape your Redbubble page.                                              |
-| ```pretty_urls```   | Boolean | ```false```   | For SEO purposes you may wish to use pretty URLS, set this to ```true``` and ensure to edit your htaccess file.
+| ```pretty_urls```   | Boolean | ```false```   | For SEO purposes you may wish to use pretty URLS, set this to ```true``` and ensure to edit your htaccess file.|
+| ```response_type``` | String  | ```array```   | Defines response type, possible values are ```array```, ```object``` and ```json```                             |
+
+## Htaccess
 
 Example:
 
-RewriteEngine On
-RewriteRule ^([^/]*)/([^/]*)/$ /shop?rbu=$1&cID=$2 [L]
-|
-| ```response_type``` | String  | ```array```   | Defines response type, possible values are ```array```, ```object``` and ```json```                             |
+```RewriteEngine On
+RewriteRule ^([^/]*)/([^/]*)/$ /shop?rbu=$1&cID=$2 [L]```
 
 ## Licence
 
