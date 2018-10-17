@@ -5,10 +5,16 @@ require_once('../class.redbubble.php');
 $config = new RedbubbleConfig('prolificlee');
 $connection = new Redbubble($config);
 
-$collections = $connection->getCollections();
-
-print_r($collections);
-die();
+if (!isset($_GET['rbu']) && !isset($_GET['cID']))
+{
+    $collections = $connection->getCollections();
+    print_r($collections);
+    die();
+} else {
+    $products = $connection->getProducts($_GET['cID']);
+    print_r($products);
+    die();
+}
 
 // require 'redbubble/redbubble.php';
 

@@ -12,9 +12,10 @@
 
 require_once('libs/html_dom_parser.php');
 require_once('class.redbubble_config.php');
+require_once('class.redbubble_cache.php');
 class Redbubble
 {
-	protected $rburl = 'http://www.redbubble.com';
+	protected $rburl 	= 'http://www.redbubble.com';
 	protected $config;
 
 	public function getRedbubbleUrl()	{
@@ -23,6 +24,10 @@ class Redbubble
 
 	public function getConfig()	{
 		return $this->config;
+	}
+
+	public function getCache()	{
+		return new RedbubbleCache();
 	}
 
 	public function __construct($config)
@@ -41,88 +46,104 @@ class Redbubble
 		return $url;
 	}
 
+	private function convertResponseType($data)
+	{
+		switch ($this->getConfig()->getResponseType())
+		{
+			case 'json':
+				$new_data = json_encode($data);
+				break;
+			case 'object':
+			default:
+				$new_data = (object) $data;
+				break;
+		}
+
+		return $new_data;
+	}
+
 	public function getCollections()
 	{
-		$url = sprintf($this->getRedbubbleUrl() . "/people/%s/portfolio/", $this->getConfig()->getRedbubbleUser());
-		$html = file_get_html($url);
-		$collection_elements = $html->find('a[class=collection-link]');
-		
-		$data = array();
-		
-		foreach ($collection_elements as $element) {
-			$item_array = array();
+		$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser());
+
+		if (!$data) {
+			$url = sprintf($this->getRedbubbleUrl() . "/people/%s/portfolio/", $this->getConfig()->getRedbubbleUser());
+			$html = file_get_html($url);
+			$collection_elements = $html->find('a[class=collection-link]');
 			
-			// get collection id
-			$collection_id = str_replace('/people/' . $this->getConfig()->getRedbubbleUser() . '/collections/', '', $element->href);
-			$item_array['collection_id'] = $collection_id;
+			$data = array();
 			
-			// get collection image
-			$pattern = array('background-image: url(',');');
-			$item_array['image'] = str_replace($pattern, '', $element->style);
+			foreach ($collection_elements as $element) {
+				$item_array = array();
+				
+				// get collection id
+				$collection_id = str_replace('/people/' . $this->getConfig()->getRedbubbleUser() . '/collections/', '', $element->href);
+				$item_array['collection_id'] = $collection_id;
+				
+				// get collection image
+				$pattern = array('background-image: url(',');');
+				$item_array['image'] = str_replace($pattern, '', $element->style);
+				
+				// get collection title
+				$spans = $element->find('span span[class=pc-title-background]');
+				$item_array['title'] = $spans[0]->innertext;
+				
+				$item_array['url'] = $this->generateCollectionLink($collection_id);
+				
+				$data[] = (object) $item_array;
+			}
+
+			$this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser(), $data);			
 			
-			// get collection title
-			$spans = $element->find('span span[class=pc-title-background]');
-			$item_array['title'] = $spans[0]->innertext;
-			
-			$item_array['url'] = $this->generateCollectionLink($collection_id);
-			
-			$data[] = $item_array;
 		}
-		
-		// conversion options
-		if ($this->response_type === 'object') {
-			$data = (object)$data;
-		} else if ($this->response_type === 'json') {
-			$data = json_encode($data);
-		}
-		
-		return $data;
+
+		return $this->convertResponseType($data);
 	}
 	
 	public function getProducts($collection_id)
 	{
-		$url = sprintf($this->getRedbubbleUrl() . "/people/%s/collections/%s", $this->getConfig()->getRedbubbleUser(), $collection_id);
-		$html = file_get_html($url);
-		$products = $html->find('a[class=grid-item]');
-		
-		$data = array();
-		
-		foreach ($products as $product) {
-			$item_array = array();
+		$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id);
+
+		if (!$data) {
+			$url = sprintf($this->getRedbubbleUrl() . "/people/%s/collections/%s", $this->getConfig()->getRedbubbleUser(), $collection_id);
+			$html = file_get_html($url);
+			$products = $html->find('a[class=grid-item]');
 			
-			// get product link
-			$item_array['link'] = $this->getRedbubbleUrl() . $product->href;
+			$data = array();
 			
-			// get product design image
-			$pattern = array('background-image: url(',');');
-			$item_array['design_image'] = str_replace($pattern, '', $product->style);
-			
-			// get product image
-			$img_tag = $product->find('img[class=design]');
-			$item_array['product_image'] = $img_tag[0]->src;
-			
-			// get product title
-			$item_array['title'] = $product->title;
-			
-			$pricing = $product->find('div span span[class=price] span');
-			
-			$pricing_array = array();
-			foreach ($pricing as $price_element) {
-				$pricing_array[] = $price_element->innertext;
+			foreach ($products as $product) {
+				$item_array = array();
+				
+				// get product link
+				$item_array['link'] = $this->getRedbubbleUrl() . $product->href;
+				
+				// get product design image
+				$pattern = array('background-image: url(',');');
+				$item_array['design_image'] = str_replace($pattern, '', $product->style);
+				
+				// get product image
+				$img_tag = $product->find('img[class=design]');
+				$item_array['product_image'] = $img_tag[0]->src;
+				
+				// get product title
+				$item_array['title'] = $product->title;
+				
+				$pricing = $product->find('div span span[class=price] span');
+				
+				$pricing_array = array();
+				foreach ($pricing as $price_element) {
+					$pricing_array[] = $price_element->innertext;
+				}
+				
+				$item_array['price'] = implode('', $pricing_array);
+				
+				$data[] = (object) $item_array;
 			}
-			
-			$item_array['price'] = implode('', $pricing_array);
-			
-			$data[] = $item_array;
+
+			$this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id, $data);
 		}
 		
-		if ($this->response_type === 'object') {
-			$data = (object)$data;
-		} else if ($this->response_type === 'json') {
-			$data = json_encode($data);
-		}
-		
-		return $data;
+		return $this->convertResponseType($data);
 	}
 }
 
