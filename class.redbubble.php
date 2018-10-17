@@ -37,7 +37,7 @@ class Redbubble
 	
 	private function generateCollectionLink($collection_id)
 	{
-		if ($this->pretty_urls) {
+		if ($this->getConfig()->getPrettyUrls()) {
 			$url = '/' .  $this->getConfig()->getRedbubbleUser() . '/' . $collection_id . '/';
 		} else {
 			$url = '?rbu=' . $this->getConfig()->getRedbubbleUser() . '&cID=' . $collection_id;
