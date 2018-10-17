@@ -37,7 +37,7 @@ class Redbubble
 	
 	private function generateCollectionLink($collection_id)
 	{
-		if ($this->getConfig()->getPrettyUrls()) {
+		if ($this->getConfig()->prettyUrls()) {
 			$url = '/' .  $this->getConfig()->getRedbubbleUser() . '/' . $collection_id . '/';
 		} else {
 			$url = '?rbu=' . $this->getConfig()->getRedbubbleUser() . '&cID=' . $collection_id;
@@ -64,7 +64,9 @@ class Redbubble
 
 	public function getCollections()
 	{
-		$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser());
+		if ($this->getConfig()->cacheResponses()) {
+			$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser());
+		}
 
 		if (!$data) {
 			$url = sprintf($this->getRedbubbleUrl() . "/people/%s/portfolio/", $this->getConfig()->getRedbubbleUser());
@@ -93,7 +95,13 @@ class Redbubble
 				$data[] = (object) $item_array;
 			}
 
-			$this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser(), $data);			
+			if ($this->getConfig()->cacheResponses()) {
+				$cache = $this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser(), $data);
+
+				if (!$cache) {
+					return $cache;
+				}
+			}
 			
 		}
 
@@ -102,7 +110,9 @@ class Redbubble
 	
 	public function getProducts($collection_id)
 	{
-		$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id);
+		if ($this->getConfig()->cacheResponses()) {
+			$data = $this->getCache()->getCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id);
+		}
 
 		if (!$data) {
 			$url = sprintf($this->getRedbubbleUrl() . "/people/%s/collections/%s", $this->getConfig()->getRedbubbleUser(), $collection_id);
@@ -140,7 +150,13 @@ class Redbubble
 				$data[] = (object) $item_array;
 			}
 
-			$this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id, $data);
+			if ($this->getConfig()->cacheResponses()) {
+				$cache = $this->getCache()->setCacheObject($this->getConfig()->getRedbubbleUser() . '-' . $collection_id, $data);
+
+				if (!$cache) {
+					return $cache;
+				}
+			}
 		}
 		
 		return $this->convertResponseType($data);

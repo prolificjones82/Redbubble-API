@@ -2,8 +2,9 @@
 
 class RedbubbleCache
 {
-    protected $cache_path   = '/cache/';
+    protected $cache_path   = '/redbubble_cache/';
     protected $duration     = 7200; // two hours
+    
 
     public function getPath()
     {
@@ -36,6 +37,12 @@ class RedbubbleCache
     public function setCacheObject($name, $array)
     {
         $file = $this->getPath() . $name . '.cache';
-		file_put_contents($file, serialize($array));
+
+        if (is_writable($file)) {
+            file_put_contents($file, serialize($array));
+            return true;
+        }
+        
+        return false;
     }
 }

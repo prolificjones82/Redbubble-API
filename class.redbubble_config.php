@@ -11,6 +11,7 @@ class RedbubbleConfig
     protected $rbuser;
     protected $response_type;
     protected $pretty_urls;
+    protected $cache_responses;
 
     public function getRedbubbleUser()
     {
@@ -22,15 +23,21 @@ class RedbubbleConfig
         return $this->response_type;
     }
 
-    public function getPrettyUrls()
+    public function prettyUrls()
     {
         return $this->pretty_urls;
     }
 
-    public function __construct($username, $response_type = 'object', $pretty_urls = false)
+    public function cacheResponses()
+    {
+        return $this->cache_responses;
+    }
+
+    public function __construct($username, $response_type = 'object', $pretty_urls = false, $cache_responses = true)
     {
         $this->rbuser           = $username;
         $this->response_type    = $response_type;
         $this->pretty_urls      = $pretty_urls;
+        $this->cache_responses  = $cache_responses;
     }
 }
