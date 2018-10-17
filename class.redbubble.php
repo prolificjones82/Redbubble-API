@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Redbubble - Homebrew Redbubble API
+ * NOTE: Requires PHP version 5 or later
+ * @package Redbubble
+ * @author Lee Jones
+ * @copyright 2012 Lee Jones
+ * @version v3.1
+ * @license MIT
+ */
+
+
 require 'html_dom_parser.php';
 
 class Redbubble
