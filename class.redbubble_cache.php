@@ -3,7 +3,7 @@
 class RedbubbleCache
 {
     protected $cache_path   = '/redbubble_cache/';
-    protected $duration     = 7200; // two hours
+    protected $duration     = 172800; // two days
     
 
     public function getPath()
