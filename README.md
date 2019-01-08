@@ -16,7 +16,7 @@ $config = new RedbubbleConfig('username', 'object', false, true);
 You can then instantiate the `Redbubble` class using this config object:
 
 ```php
-$connection = new Rebubble($config);
+$connection = new Redbubble($config);
 ```
 
 There are now two functions you can use, ```getCollections()``` and ```getProducts($collection_id)```. 
