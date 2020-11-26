@@ -4,16 +4,17 @@
     "type": "library",
     "description": "A homebrew API style page scraper designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections.",
     "autoload": {
-        "psr-4" : {
-            "Redbubble\\" : "src/"
+        "psr-4": {
+            "Redbubble\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4" : {
-            "Tests\\Redbubble\\" : "tests/Redbubble/"
+        "psr-4": {
+            "Tests\\Redbubble\\": "tests/Redbubble/"
         }
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4"
-    }
+    },
+    "require": {}
 }

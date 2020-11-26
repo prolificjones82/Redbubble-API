@@ -6,24 +6,32 @@ namespace Tests\Redbubble;
 
 use PHPUnit\Framework\TestCase;
 use Redbubble\Redbubble;
+use Redbubble\Config;
+use Redbubble\Cache;
 
 class RedbubbleTest extends TestCase
 {
-    public function testItRebubbleObject(): void
+    public function testItRedbubbleObject(): void
     {
         $redbubble = new Redbubble('prolific_lee');
         $this->assertInstanceOf(Redbubble::class, $redbubble);
     }
 
-    public function testItRebubbleConfigObject(): void
+    public function testItRedbubbleConfigObject(): void
     {
         $redbubble = new Redbubble('prolific_lee');
         $this->assertInstanceOf(Config::class, $redbubble->getConfig());
     }
 
-    // public function testItRebubbleCacheObject(): void
-    // {
-    //     $redbubble = new Redbubble('prolific_lee');
-    //     $this->assertInstanceOf(Redbubble::class, $redbubble);
-    // }
+    public function testItRedbubbleCacheObject(): void
+    {
+        $redbubble = new Redbubble('prolific_lee');
+        $this->assertInstanceOf(Cache::class, $redbubble->getCache());
+    }
+
+    public function testItUsernameIsString()
+    {
+        $redbubble = new Redbubble('prolific_lee');
+        $this->assertIsString($redbubble->getConfig()->getUsername());
+    }
 }
