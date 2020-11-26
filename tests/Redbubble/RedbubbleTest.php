@@ -9,10 +9,21 @@ use Redbubble\Redbubble;
 
 class RedbubbleTest extends TestCase
 {
-    public function testItGreetsUser(): void
+    public function testItRebubbleObject(): void
     {
-        $greeting = new Greeting('Rasmus Lerdorf');
-
-        $this->assertSame('Hello Rasmus Lerdorf', $greeting->sayHello());
+        $redbubble = new Redbubble('prolific_lee');
+        $this->assertInstanceOf(Redbubble::class, $redbubble);
     }
+
+    public function testItRebubbleConfigObject(): void
+    {
+        $redbubble = new Redbubble('prolific_lee');
+        $this->assertInstanceOf(Config::class, $redbubble->getConfig());
+    }
+
+    // public function testItRebubbleCacheObject(): void
+    // {
+    //     $redbubble = new Redbubble('prolific_lee');
+    //     $this->assertInstanceOf(Redbubble::class, $redbubble);
+    // }
 }
