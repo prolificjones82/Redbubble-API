@@ -15,5 +15,7 @@
         }
     },
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "symfony/filesystem": "^5.1"
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace RedbubbleApi;
 
+use RedbubbleApi\Cache as RedbubbleCache;
+
 /**
  * Redbubble Config
  *
@@ -25,14 +27,9 @@ class Config
     protected $prettyUrls;
 
     /**
-     * @var bool
+     * @var RedbubbleCache
      */
-    protected $cacheResponse;
-
-    /**
-     * @var string
-     */
-    protected $cachePath;
+    protected $cache;
 
     /**
      * Init Class
@@ -45,13 +42,26 @@ class Config
      *
      * @return void
      */
-    public function __construct($user, $responseType = 'object', $prettyUrls = false, $cacheResponse = false, $cachePath = '')
-    {
+    public function __construct(
+        $user,
+        $responseType = 'object',
+        $prettyUrls = false,
+        $useCache = true,
+        $cachePath = '',
+        $cacheExpiry = 172800
+    ) {
         $this->setUser($user);
         $this->setResponseType($responseType);
         $this->setPrettyUrls($prettyUrls);
         $this->setCacheResponse($cacheResponse);
         $this->setCachePath($cachePath);
+
+        // if ($useCache) {
+        //     $cache = new RedbubbleCache($cachePath, $cacheExpiry);
+        //     $this->setCache($cache);
+        // } else {
+        //     $this->setCache(null);
+        // }
     }
 
     /**
@@ -123,49 +133,25 @@ class Config
     }
 
     /**
-     * Get the value of cacheResponse
+     * Get the value of cache
      *
-     * @return  bool
+     * @return  RedbubbleCache
      */
-    public function getCacheResponse()
+    public function getCache()
     {
-        return $this->cacheResponse;
+        return $this->cache;
     }
 
     /**
-     * Set the value of cacheResponse
+     * Set the value of cache
      *
-     * @param  bool  $cacheResponse
+     * @param  RedbubbleCache  $cache
      *
      * @return  self
      */
-    public function setCacheResponse(bool $cacheResponse)
+    public function setCache(RedbubbleCache $cache)
     {
-        $this->cacheResponse = $cacheResponse;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of cachePath
-     *
-     * @return  string
-     */
-    public function getCachePath()
-    {
-        return $this->cachePath;
-    }
-
-    /**
-     * Set the value of cachePath
-     *
-     * @param  string  $cachePath
-     *
-     * @return  self
-     */
-    public function setCachePath(string $cachePath)
-    {
-        $this->cachePath = $cachePath;
+        $this->cache = $cache;
 
         return $this;
     }
