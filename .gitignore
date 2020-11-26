@@ -1,4 +1,7 @@
-
-/vendor/
 /_OLD/
 /v3/
+
+composer.phar
+/vendor/
+/.idea/
+.phpunit.result.cache
