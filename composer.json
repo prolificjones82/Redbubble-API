@@ -16,6 +16,8 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "symfony/filesystem": "^5.1"
+        "symfony/filesystem": "^5.1",
+        "symfony/cache": "^5.1",
+        "symfony/dom-crawler": "^5.1"
     }
 }
