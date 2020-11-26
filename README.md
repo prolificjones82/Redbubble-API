@@ -1,5 +1,7 @@
 # Redbubble-API Scraper
 
+**THIS PROJECT IS NO LONGER SUPPORTED**
+
 A homebrew API style page scraper designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections. The API terminates at the point of selecting an individual item, this will send you to the Redbubble website page for that item.
 
 ## Quick Use
@@ -19,7 +21,7 @@ You can then instantiate the `Redbubble` class using this config object:
 $connection = new Redbubble($config);
 ```
 
-There are now two functions you can use, ```getCollections()``` and ```getProducts($collection_id)```. 
+There are now two functions you can use, ```getCollections()``` and ```getProducts($collection_id)```.
 
 The ```getProducts()``` function requires a ```$collection_id``` as a parameter this is returned as part of the ```GetCollections()``` function.
 
