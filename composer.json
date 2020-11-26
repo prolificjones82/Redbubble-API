@@ -1,0 +1,19 @@
+{
+    "name": "leejones/redbubble-api",
+    "description": "A homebrew API style page scraper designed to put your Redbubble products on your webpage. It allows you to pull a users collections and images inside the collections.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lee Jones",
+            "email": "mail@leejones.me.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RedbubbleApi\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
